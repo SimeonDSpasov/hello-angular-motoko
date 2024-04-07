@@ -1,0 +1,100 @@
+<div class="wrapper">
+
+    <div class="typewriter">
+        <h1>We are Legion.</h1>
+    </div>
+
+    <div class="landing__wrapper">
+        <div>
+            <p>Where strategy meets opportunity.</p>
+
+            <button class="inline-block shrink-0 rounded-md border border-orange-500 bg-orange-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-blue-500">
+                Explore
+            </button>
+
+        </div>
+    </div>
+
+    <div class="player-stats">
+        <div class="stats shadow">
+
+            <div class="stat place-items-center">
+              <div class="stat-title">Participants</div>
+              <div class="stat-value">11</div>
+              <div class="stat-desc">From March 1st to April 1st</div>
+            </div>
+            
+            <div class="stat place-items-center">
+              <div class="stat-title">Users</div>
+              <div class="stat-value text-primary">200</div>
+              <div class="stat-desc text-primary">↗︎ 4 (2%)</div>
+            </div>
+            
+            <div class="stat place-items-center">
+              <div class="stat-title">Total tournaments</div>
+              <div class="stat-value">12</div>
+              <div class="stat-desc">↗︎ 1 (10%)</div>
+            </div>
+            
+          </div>
+    </div>
+
+    <app-how-it-works></app-how-it-works>
+
+
+    <div class="introduction-section">
+        <h1 #whoarewe> Who are we? </h1>
+
+        <div #introductionWrapper class="introduction-wrapper">
+            @defer (on viewport(whoarewe)) {
+                <img class="img-class" src="assets/img/ta.png" alt="technical analysis in tradingview">
+            }
+
+            <span class="introduction-text">
+                We are a group of experienced Cyber Ninjas who fight for financial freedom and share practices, experience, and knowledge in the field of technical analysis because together we are stronger!
+            </span>
+        </div>
+
+        <div class="introduction-wrapper">
+            <span class="introduction-text">
+                A success driven community with the latest crypto market data, heatmaps, liq. levels, signals, news, analysis and many more. Over 300 people have successfully passed our trading academy 
+                and are there to learn more. Be a part of the movement.
+            </span>
+
+            @defer (on viewport(introductionWrapper)) {
+                <iframe src="https://discord.com/widget?id=663399495425589279&theme=dark" width="400" height="400" allowtransparency="true" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+            }
+        </div>
+    </div>
+
+    <div class="FAQ-Section">
+        <h1> Frequently Asked Questions </h1>
+
+        <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-200">
+            <div class="collapse-title text-xl font-medium">
+                How do I participate in the crypto trading tournament on this platform using the Bybit API?
+            </div>
+            <div class="collapse-content"> 
+            <p>To participate in the tournament, first, ensure you have an active BYBIT account. Once registered, navigate to the dashboard section and connect yourBybit APIs to the account. Follow the provided instructions to link your account, and you'll be ready to compete in the tournament using the power of the Bybit API for seamless and efficient trading.</p>
+            </div>
+        </div>
+
+        <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-200">
+            <div class="collapse-title text-xl font-medium">
+            Focus me to see content
+            </div>
+            <div class="collapse-content"> 
+            <p>tabindex="0" attribute is necessary to make the div focusable</p>
+            </div>
+        </div>
+
+        <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-200">
+            <div class="collapse-title text-xl font-medium">
+                Are there any specific requirements or restrictions during the tournament?
+            </div>
+            <div class="collapse-content"> 
+            <p>Follow each individual tournament instructions and requirements.</p>
+            </div>
+        </div>
+    </div>
+</div>

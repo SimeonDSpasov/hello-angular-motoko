@@ -1,0 +1,194 @@
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard {
+  width: 100%;
+  margin: 2rem auto;
+  max-width: 1200px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 4em;
+}
+
+.card {
+  max-width: 1200px;
+  width: calc(100% - 36px);
+  margin: 0 auto 42px auto;
+}
+
+.card-secondary {
+  max-width: 800px;
+}
+
+.card-actions {
+  margin: 1rem 0;
+}
+
+p {
+  font-weight: 600;
+}
+
+.api-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  font-weight: 700;
+  font-size: 48px;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.content-wrapper {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 60px;
+}
+
+.content {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.stat-wrap {
+  width: 90px;
+  justify-content: center;
+  align-items: center;
+}
+
+.stat-wrap svg-icon {
+  margin-right: 8px;
+}
+
+
+.stat-wrap p {
+  margin-left: 2px;
+  padding: 2px;
+}
+
+.line {
+  width: 1px;
+  height: 100%;
+  background-color: rgb(97, 97, 97);
+  border-radius: 1px;
+}
+
+.btn {
+  background-color: var(--blue-dark-light);
+}
+
+.alert {
+  display: flex;
+  width: calc(100% - 48px);
+  animation: 1s popUp ease-in;
+  position: fixed;
+  bottom: 12px;
+  left: 0;
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+.modal-box .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.disconnect-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 1em;
+}
+
+.user-tournaments-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  color: white;
+  background-color: #101010;
+  box-sizing: border-box;
+  border-radius: 16px;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.35);
+  padding: 32px;
+  margin-bottom: 36px;
+}
+
+.tournaments-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.tournament {
+  width: 48%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(0, 0, 0, 1);
+  padding: 12px;
+  margin: 12px 0px;
+}
+
+.tournament .status {
+  display: flex;
+  justify-content: center;
+  column-gap: 8px;
+  align-items: center;
+}
+
+.user-tournaments-section h1 {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.status-chip {
+  border-radius: 10px;
+  font-size: 14px;
+  padding: 8px 16px;
+}
+
+.green { 
+  border: 1px solid rgb(0,180,165, 0.6);
+  background-color: rgb(0,180,165, 0.6);
+}
+
+.blue {
+  border: 1px solid rgb(58, 58, 164, 0.6);
+  background-color: rgb(58, 58, 164, 0.6);
+}
+
+.grey {
+  border: 1px solid rgba(54, 28, 105, 0.6);
+  background-color: rgba(54, 28, 105, 0.6);
+}
+
+@keyframes popUp {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,60 @@
+.result-board {
+    width: 100%;
+    max-height: 600px;
+    overflow: auto;
+    padding: 6px;
+    margin: 0 auto;
+}
+
+.result-board-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    background-color: rgba(3, 3, 3, 0.2);
+    box-shadow: rgba(0, 0, 0, 0.12) 5px 1px 3px 2px, rgba(0, 0, 0, 0.24) 0px 1px 2px 2px;
+    border-radius: 8px;
+    padding: 12px 24px;
+}
+
+.result-board-row:not(:last-of-type) {
+    margin-bottom: 1rem;
+}
+
+.result-board-row span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.username-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.position-box {
+    width: 32px;
+    height: 32px;
+    font-weight: 600;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #818181;
+    background-image: linear-gradient(43deg, #818181 21%, #a6a6a6 54%, #b9b9b9 66%);
+    margin-right: 8px;
+}
+
+.first-place {
+    background-color: #e2c131;
+    background-image: linear-gradient(43deg, #e2c131 21%, #c88250 54%, #FFCC70 66%);
+}
+
+.second-place {
+    background-color: #8c90b1;
+    background-image: linear-gradient(43deg, #8c90b1 21%, #82b1de 54%, #5c70a8 66%);    
+}
+
+.third-place {
+    background-color: #bb6a3c;
+    background-image: linear-gradient(43deg, #bb6a3c 21%, #de9a82 54%, #a8755c 66%);    
+}

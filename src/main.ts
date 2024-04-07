@@ -1,15 +1,6 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core';
-import { AppComponent } from './app/app.component';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { environment } from './environments/environment';
+import { AppComponent } from './app/app.component';
+import { appConfig } from './app/app.config';
 
-if (environment.production) {
-  enableProdMode();
-}
-bootstrapApplication(AppComponent, {
-  providers: [
-    importProvidersFrom(HttpClientModule),
-  ]
-});
-
+bootstrapApplication(AppComponent, appConfig)
+  .catch(err => { console.log (err) })

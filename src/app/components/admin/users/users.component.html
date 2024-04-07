@@ -1,0 +1,36 @@
+<div class="users-section">
+    <h1>Users</h1>
+
+    @if (users) {
+        <ipi-table [data]="users" [columns]="usersTableColumns" [pageable]="true" 
+        [sortIndex]="6" [sortDirection]="'desc'"></ipi-table>
+    }
+</div>
+
+@if (shouldRenderEditUser) {
+    <ipi-dialog>
+        <ng-template #title>Edit User</ng-template>
+    
+        <ng-template #content>
+            <ipi-input [options]="emailOptions"></ipi-input>
+
+            <ipi-input [options]="usernameOptions"></ipi-input>
+
+            <ipi-input [options]="apiPublicOptions"></ipi-input>
+
+            <ipi-input [options]="apiSecretOptions"></ipi-input>
+
+            <ipi-input appNumbersOnly [options]="eloOptions"></ipi-input>
+
+            <ipi-input appNumbersOnly [options]="winrateOptions"></ipi-input>
+
+            <ipi-input appNumbersOnly [options]="winsOptions"></ipi-input>
+        </ng-template>
+    
+        <ng-template #actions>
+                <button class="btn mr-6 pl-8 pr-8" (click)="shouldRenderEditUser = false">Close</button>
+
+                <button class="btn pl-8 pr-8 bg-primary hover:bg-success border-white" (click)="edit()">Edit</button>
+        </ng-template>
+    </ipi-dialog>
+}

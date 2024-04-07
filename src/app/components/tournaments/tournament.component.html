@@ -1,0 +1,63 @@
+<h2>Tournaments</h2>
+
+@if (fetchedTournaments) {
+    <div class="tournament-section">
+
+        <h3>Upcoming</h3>
+        @for (tournament of fetchedTournaments.upcoming; track $index) {
+            <ng-container *ngTemplateOutlet="tournamentTemplate; context: { tournament } "></ng-container>
+        }
+        
+        <h3>Ongoing</h3>
+        @for (tournament of fetchedTournaments.ongoing; track $index) {
+            <ng-container *ngTemplateOutlet="tournamentTemplate; context: { tournament } "></ng-container>
+        }
+       
+        <h3>Finished</h3>
+        @for (tournament of fetchedTournaments.finished; track $index) {
+            <ng-container *ngTemplateOutlet="tournamentTemplate; context: { tournament } "></ng-container>
+        }
+    </div>
+}
+
+<ng-template #tournamentTemplate let-tournament="tournament">
+    <div class="tournament">
+        <div class="tournament-content">
+            <h3>{{ tournament.title }}</h3>
+
+            @if (tournament.status !== tournamentStatus.Finished) {
+                <div class="start-time">
+                    <p> {{ tournament.status === tournamentStatus.Upcoming ? 'Start time' : 'Ends in' }} </p>
+
+                    <countdown #cd [config]="{ leftTime: tournament.leftTime / 1000, format: tournament.format ? tournament.format : 'dd:hh:mm:ss' }"/>
+                </div>
+            }
+
+            <div class="participant-count">
+                @if (tournament.participants) {
+                    <p>Participants {{ tournament.participants.length }}</p>
+                } @else {
+                 <p> Participants 0</p>
+                }
+
+            </div>
+        </div>
+
+        @if (tournament.status === tournamentStatus.Upcoming) {
+            <div class="tournament-button" (click)="navigateToTournament(tournament.title)">
+                JOIN
+            </div>
+        } @else if (tournament.status === tournamentStatus.Ongoing) {
+            <div class="tournament-button view-result" (click)="navigateToTournament(tournament.title)">
+                VIEW
+            </div>
+        } @else {
+            <div class="tournament-button view-result" (click)="navigateToTournament(tournament.title)">
+                VIEW RESULTS
+            </div>
+        }
+
+
+    </div>
+
+</ng-template>

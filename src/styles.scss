@@ -1,4 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
-body,html{
-    height: 100%;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './app/styles/variables.css';
+@import './app/styles/fonts.css';
+
+html, body {
+  font-family: 'CircularXX';
+  background-color: var(--blue-dark);
+  background-size: cover;
+  background-image: url('./assets/img/background.svg');
+  background-repeat: no-repeat;
+  Background-attachment: fixed;
+}
+
+body {
+  width: 100%;
+}
+
+* {
+  font-family: 'CircularXX', sans-serif;
+  font-weight: 400;
+}
+
+h2 {
+  font-weight: 600;
+  line-height: 0.8em;
+  text-align: center;
 }

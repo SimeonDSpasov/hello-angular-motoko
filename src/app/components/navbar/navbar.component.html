@@ -1,0 +1,128 @@
+<app-register [registerClicked]="registerClicked" [loginClicked]="loginClicked" (closeChange)="closeAuthModal()" (stateChange)="changeState()"></app-register>
+
+
+<div class="drawer">
+  <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
+  <div class="drawer-content flex flex-col">
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="flex-1 px-2 mx-2">
+      <a class="text-white" href="/">
+        <h2>CRYPTO<br>NINJAS</h2>
+      </a>
+      </div>
+      <div class="flex-none hidden lg:block">
+        <ul class="menu menu-horizontal">
+          <!-- Navbar menu content here -->
+
+          <li>
+            @if (!isLogged) {
+              <button class="inline-block shrink-0 rounded-md border border-orange-500 bg-orange-500 px-6 py-2 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-blue-500"
+              (click)="registerClick()">
+                JOIN
+              </button>
+            }
+          </li>
+
+          <li>
+            @if (!isLogged) {
+              <button class="inline-block shrink-0 rounded-md border border-orange-500 bg-transparent px-6 py-2 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-blue-500"
+                (click)="loginClick()">
+                LOGIN
+              </button>
+            }
+          </li>
+
+          @if (userService.isUserAdmin()) {
+            <li>
+              <button class="flex shrink-0 rounded-md border border-orange-500 bg-orange-500 px-6 py-2 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-blue-500"
+              [routerLink]="'/users'">
+                <svg-icon [src]="'/assets/img/navbar/users.svg'"></svg-icon>
+                  Users
+              </button>
+            </li>
+          }
+
+          <li>
+            @if (isLogged) {
+              <button class="flex shrink-0 rounded-md border border-orange-500 bg-orange-500 px-6 py-2 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-blue-500"
+              [routerLink]="'/tournaments'">
+                <svg-icon [src]="'/assets/img/navbar/sword.svg'"></svg-icon>
+  
+                Tournaments
+              </button>
+            }
+          </li>
+
+          <li>
+            @if (isLogged) {
+              <button class="flex shrink-0 rounded-md border border-orange-500 bg-orange-500 px-6 py-2 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-blue-500"
+              [routerLink]="'/dashboard'">
+                <svg-icon [src]="'/assets/img/dashboard/dashboard.svg'"></svg-icon>
+
+                Dashboard
+            </button>
+            }
+          </li>
+
+          <li>
+            @if (isLogged) {
+              <button (click)="logOut()" class="flex shrink-0 rounded-md border border-orange-500 bg-orange-500 px-6 py-2 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-blue-500">
+                <svg-icon [src]="'/assets/img/dashboard/logout.svg'"></svg-icon>
+
+                Log out
+            </button>
+            }
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="flex-none lg:hidden">
+        <label for="my-drawer-3" aria-label="open sidebar" class="btn btn-square btn-ghost bg-orange-500">
+          <svg-icon [src]="'/assets/img/drawer.svg'" ></svg-icon>
+        </label>
+      </div>
+      
+    </div>
+  </div> 
+
+  <div class="drawer-side">
+    <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label> 
+    <ul class="menu p-4 w-80 min-h-full bg-base-200">
+      <!-- Sidebar content here -->
+      <li *ngIf="!isLogged">
+        <a (click)="registerClick(); toggleCheckbox()" class="drawer-button">JOIN</a>
+      </li>
+
+      <li *ngIf="isLogged">    
+        <a [routerLink]="'/dashboard'" (click)="toggleCheckbox()">
+          <svg-icon [src]="'/assets/img/dashboard/dashboard.svg'"></svg-icon>
+          Dashboard
+        </a>
+      </li>
+
+      <li *ngIf="isLogged">    
+        <a [routerLink]="'/tournaments'" (click)="toggleCheckbox()">
+          <svg-icon [src]="'/assets/img/navbar/sword.svg'"></svg-icon>
+          Tournaments
+        </a>
+      </li>
+
+      <li *ngIf="userService.isUserAdmin()">
+        <a [routerLink]="'/users'" (click)="toggleCheckbox()">
+          <svg-icon [src]="'/assets/img/navbar/users.svg'"></svg-icon>
+          Users
+        </a>
+      </li>
+
+      <li *ngIf="isLogged">
+        <a (click)="logOut()" (click)="toggleCheckbox()">
+          <svg-icon [src]="'/assets/img/dashboard/logout.svg'"></svg-icon>
+          Log out
+        </a>
+      </li>
+  
+    </ul>
+  </div>
+</div>

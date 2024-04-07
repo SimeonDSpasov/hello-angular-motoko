@@ -1,0 +1,13 @@
+
+router-outlet {
+    z-index: 999;
+}
+
+
+.app-container {
+    min-height: 100vh;
+    /* display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: auto; */
+    margin: auto;
+}

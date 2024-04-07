@@ -1,0 +1,47 @@
+form {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  background-color: var(--blue-dark);
+  width: 100wh;
+  position: relative;
+}
+
+input {
+  margin: 2rem;
+}
+
+.register__form__wrapper {
+  position:sticky;
+}
+
+.register__form {
+  max-width: 800px;
+  width: calc(100vw - 48px);
+  margin: 2rem auto;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.12) 5px 1px 3px 2px, rgba(0, 0, 0, 0.24) 0px 1px 2px 2px;
+}
+.btn-square {
+  position: absolute;
+  top: 3%;
+  right: 3%;
+}
+input {
+  margin: 0;
+}
+
+#MarketingAccept:checked {
+  background-color: orange;
+}
+.invalid {
+  color: red;
+}

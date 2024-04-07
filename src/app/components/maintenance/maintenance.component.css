@@ -1,0 +1,24 @@
+h1 {
+  color: white;
+  font-size: 4em;
+  font-weight: 700; 
+}
+
+.landing__wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50vh;
+}
+
+.landing__wrapper p {
+  width: 40%;
+  color: white;
+}
+
+.landing__wrapper h1 {
+  width: 40%;
+}

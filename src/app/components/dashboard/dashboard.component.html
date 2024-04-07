@@ -1,0 +1,237 @@
+<div class="dashboard">
+  <h2 class="card-header">Welcome, {{ user.username }}</h2>
+
+  <div class="card w-96 bg-orange-500 text-primary-content">
+      <div class="card-body">
+        <div class="content-wrapper">
+          <p class="content">Email: {{ user.email }}</p>
+
+          <div class="divider lg:divider-horizontal"></div> 
+
+          <p class="content">Username: {{ user.username }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-secondary w-96 bg-orange-500 text-primary-content">
+    <div class="card-body">
+      <div class="content-wrapper">
+
+        <div class="content">
+          <p>Winrate</p>
+
+          <div class="stat-wrap flex">
+            <svg-icon [src]="'/assets/img/dashboard/percentage.svg'"></svg-icon>
+            <p> {{ user.winrate }} </p>
+          </div>
+
+        </div>
+
+        <div class="divider lg:divider-horizontal"></div> 
+
+        <div class="content">
+          <p>Wins</p>
+
+          <div class="stat-wrap flex">
+            <svg-icon [src]="'/assets/img/dashboard/crown.svg'"></svg-icon>
+            <p> {{ user.wins }} </p>
+          </div>
+
+        </div>
+
+
+        <div class="divider lg:divider-horizontal"></div> 
+
+        <div class="content">
+          <p>Elo</p>
+
+          <div class="stat-wrap flex">
+            <svg-icon [src]="'/assets/img/dashboard/elo.svg'"></svg-icon>
+            <p> {{ user.elo }} </p>
+          </div>
+
+          @switch (true) {
+            @case (this.user.elo < 1200) {
+              <progress class="progress w-42 mt-1" [value]="user.elo" max="2500"></progress>
+            }
+            @case (this.user.elo >= 1200 && this.user.elo < 1300) {
+              <progress class="progress progress-accent w-42 mt-1" [value]="user.elo" max="2500"></progress>
+            }
+            @case (this.user.elo >= 1300 && this.user.elo < 1400) {
+              <progress class="progress progress-success w-42 mt-1" [value]="user.elo" max="2500"></progress>
+            }
+            @case (this.user.elo >= 1400 && this.user.elo < 1700) {
+              <progress class="progress progress-info w-42 mt-1" [value]="user.elo" max="2500"></progress>
+            }
+            @case (this.user.elo >= 1700 &&this.user.elo < 2000) {
+              <progress class="progress progress-warning w-42 mt-1" [value]="user.elo" max="2500"></progress>
+            }
+            @case (this.user.elo > 2000) {
+              <progress class="progress progress-error w-42 mt-1" [value]="user.elo" max="2500"></progress>
+            }
+            @default {
+              
+            }
+          }
+
+
+        </div>
+    </div>
+  </div>
+</div>
+
+  <div class="card-actions">
+    <button class="btn">Change password</button>
+
+      @if (this.user.api_public) {
+        <button class="btn" onclick="my_modal_2.showModal()">Disconnect Bybit</button>
+      } @else {
+        <button class="btn" onclick="my_modal_3.showModal()">Connect Bybit</button>
+      }
+
+  </div>
+</div>
+
+<div class="user-tournaments-section">
+  <h1>Tournament history</h1>
+
+
+  <div class="tournaments-wrapper">
+    @for (tournament of user.tournamentsId; track $index) {
+      <div class="tournament">
+        <h3>{{ tournament.title }}</h3>
+    
+        <div class="status">
+          <span class="status-chip"
+          [ngClass]="{
+              'green': tournament.status === 'ongoing',
+              'blue': tournament.status === 'upcoming',
+              'grey': tournament.status !== 'ongoing' && tournament.status !== 'upcoming',
+            }"> {{ tournament.status.toUpperCase() }} </span>
+
+          <button class="btn" (click)="router.navigate([ 'tournaments/' + tournament.title ])">View</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+@defer (on idle) {
+  @if (showAlert) {
+    @if (alertType === 'success') {
+      <div role="alert" class="alert alert-success">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span>{{ alertMessage }}</span>
+      </div>
+    } @else {
+      <div role="alert" class="alert alert-error">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span>{{ alertMessage }}</span>
+      </div>
+    }
+  }
+
+  <dialog id="my_modal_3" class="modal">
+    <div class="modal-box">
+      <div class="top">
+        <h3 class="font-bold text-lg">Connect bybit</h3>
+
+        <form method="dialog">
+          <button #connectCloseButton class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+      </div>
+
+  
+      <form action="#" class="api-form mt-8 grid grid-cols-12 gap-6" [formGroup]="bybitRequestForm">
+          <div class="col-span-6 sm:col-span-3">
+            <label
+              for="publicKey"
+              class="block text-sm font-medium text-primary py-2"
+            >
+              Public API Key
+            </label>
+  
+            <div class="form-control w-full">
+              <input type="text"
+                placeholder="Type here"
+                [ngClass]="{'input-success': !publickeyHasErrors(), 'input-error': publickeyHasErrors() && !bybitRequestForm.controls['publickey'].pristine}"
+                ng-model="publickey"
+                class="input input-primary w-full"
+                formControlName="publickey"
+              />
+  
+                  <label class="label">
+                    <span class="label-text-alt"><ng-container *ngIf="!bybitRequestForm.pristine && bybitRequestForm.controls['publickey'].errors">Invalid Public API Format</ng-container></span>
+                  </label>
+  
+            </div>
+          </div>
+  
+          <div class="col-span-6 sm:col-span-3">
+            <label
+              for="Password"
+              class="block text-sm font-medium text-primary py-2"
+            >
+              Private API Key
+            </label>
+            <div class="form-control w-full">
+  
+              <input type="password"
+                id="Privatekey" name="private_key"
+                formControlName="privatekey"
+                placeholder="Private API key here.."
+                [ngClass]="{'input-success': !privatekeyHasErrors(), 'input-error': privatekeyHasErrors() && !bybitRequestForm.controls['privatekey'].pristine}"
+                class="input input-primary w-full"
+              />
+  
+                <label class="label">
+                  <span class="label-text-alt"><ng-container *ngIf="!bybitRequestForm.controls['privatekey'].pristine && bybitRequestForm.controls['privatekey'].errors">Invalid Private API Format </ng-container></span>
+                </label>
+  
+            </div>
+          </div>
+          <div [ngClass]="{'justify-center': this.isLoading, 'justify-between': !this.isLoading}" class="col-span-6 sm:flex flex-row items-center sm:items-center sm:gap-4">
+            <button *ngIf="!this.isLoading"
+              class="inline-block shrink-0 rounded-md border border-orange-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-blue-500"
+              (click)="this.router.navigate([ 'find-your-api-keys' ])">
+              Find your API keys
+            </button>
+  
+            <button  *ngIf="!this.isLoading"
+              (click)="validateAndUpdateApiKeys()"
+              [ngClass]="{'bg-error border-error hover:text-error': bybitRequestForm.invalid, 'bg-primary border-primary hover:text-primary': !bybitRequestForm.invalid}"
+              [disabled]="bybitRequestForm.invalid"
+              class="inline-block shrink-0 rounded-md border bg-orange-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500">
+                Connect
+          </button>
+  
+          <span *ngIf="this.isLoading" class="loading loading-infinity loading-lg"></span>
+          </div>
+        </form>
+    </div>
+  </dialog>
+
+  <dialog id="my_modal_2" class="modal">
+    <div class="modal-box">
+        <div class="top">
+          <h3 class="font-bold text-lg">Are you sure you want to disconnect bybit from this account?</h3>
+  
+          <form method="dialog">
+            <button #disconnectCloseButton class="btn btn-sm btn-circle btn-ghost">✕</button>
+          </form>
+        </div>
+
+      <div class="disconnect-modal-content">
+        <span>If you are currently in a tournament you will be removed and your progress will be lost. You won't be able to join back again.</span>
+
+        <button *ngIf="!this.isLoading"
+        (click)="clearBybitKeys()"
+        class="inline-block shrink-0 rounded-md border bg-orange-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring active:text-blue-500">
+          Disconnect
+        </button>
+
+        <span *ngIf="this.isLoading" class="loading loading-infinity loading-lg"></span>
+      </div>
+    </div>
+  </dialog>
+}

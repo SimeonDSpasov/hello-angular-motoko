@@ -1,0 +1,138 @@
+<div class="section-wrapper">
+    @if (tournament) {
+        <div class="tournament-header">
+            <h1> {{ tournament.title }} </h1>
+
+            <div class="status-wrapper">
+                <span class="status-chip"
+                [ngClass]="{
+                    'green': tournament.status === 'ongoing',
+                    'blue': tournament.status === 'upcoming',
+                    'grey': tournament.status !== 'ongoing' && tournament.status !== 'upcoming',
+                  }"> {{ tournament.status.toUpperCase() }} </span>
+    
+            </div>
+        </div>
+
+        <div class="tournament-content">
+
+            <div class="content">
+                @if (tournament.participants) {
+                    <app-results-component class="results" [results]="tournament.participants"></app-results-component>
+                }
+
+                <div class="info-card-wrapper">
+
+                    @switch (tournament.status) {
+                        @case (tournamentStatus.Upcoming) {
+                            <div class="info-card">
+                                <div class="start-time">
+                                    <p>Start time</p>
+                                    @if (tournament.leftTime) {
+                                        <countdown #cd [config]="{ leftTime: tournament.leftTime / 1000, format: tournament.format ? tournament.format : 'dd:hh:mm:ss' }"/>
+                                    }
+        
+                                </div>
+                            </div>
+                        }
+
+                        @case (tournamentStatus.Ongoing) {
+                            <div class="info-card">
+                                <div class="start-time">
+                                    <p>Ends in:</p>
+                                    @if (tournament.leftTime) {
+                                        <countdown #cd [config]="{ leftTime: tournament.leftTime / 1000, format: tournament.format ? tournament.format : 'dd:hh:mm:ss' }"/>
+                                    }
+        
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    <div class="info-card"></div>
+    
+                    <div class="info-card"></div>
+
+                    @if (tournament.status === 'upcoming') {
+                        @if (!userJoined) {
+                            <button onclick="my_modal_3.showModal()"
+                            class="inline-block shrink-0 rounded-md border border-orange-500 bg-orange-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-blue-500">
+                            JOIN
+                          </button>
+                        } @else {
+                            <button onclick="my_modal_4.showModal()"
+                            class="inline-block shrink-0 rounded-md border border-orange-500 bg-orange-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-blue-500">
+                            LEAVE
+                          </button>
+                        }
+   
+                    }
+                </div>
+
+            </div>
+
+
+        </div>
+    }
+</div>
+
+<dialog id="my_modal_3" class="modal">
+  <div class="modal-box">
+    <div class="top">
+      <h3 class="font-bold text-lg">Are you sure you want to join this tournament?</h3>
+
+      <form method="dialog">
+        <button #addUserCloseButton class="btn btn-sm btn-circle btn-ghost">✕</button>
+      </form>
+    </div>
+
+    <div class="modal-content-wrapper">
+        <p>Joining this challenge will affect your ELO Rank.</p>
+
+        <button (click)="addUserToTournament()"
+            class="inline-block shrink-0 rounded-md border border-orange-500 bg-orange-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-blue-500">
+            JOIN
+        </button>
+    </div>
+
+  </div>
+</dialog>
+
+<dialog id="my_modal_4" class="modal">
+    <div class="modal-box">
+      <div class="top">
+        <h3 class="font-bold text-lg">Are you sure you want to leave this tournament?</h3>
+
+        <form method="dialog">
+          <button #removeUserCloseButton class="btn btn-sm btn-circle btn-ghost">✕</button>
+        </form>
+      </div>
+
+  
+      <div class="modal-content-wrapper">
+          <p>When tournament begins you won't be able to join back again.</p>
+
+          <button (click)="removeUserFromTournament()"
+              class="inline-block shrink-0 rounded-md border border-orange-500 bg-orange-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-blue-500">
+              LEAVE
+          </button>
+      </div>
+  
+    </div>
+  </dialog>
+
+@defer (on idle) {
+    @if (showAlert) {
+      @if (alertType === 'success') {
+        <div role="alert" class="alert alert-success">
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>{{ alertMessage }}</span>
+        </div>
+      } @else {
+        <div role="alert" class="alert alert-error">
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>{{ alertMessage }}</span>
+        </div>
+      }
+    }
+}

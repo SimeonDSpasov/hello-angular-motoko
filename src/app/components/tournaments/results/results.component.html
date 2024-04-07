@@ -1,0 +1,23 @@
+@if (results) {
+    <div class="result-board">
+        @for (user of results; track $index) {
+            <div class="result-board-row">
+                <div class="username-wrapper">
+                    <div class="position-box"
+                    [ngClass]="{
+                        'first-place': $index === 0, 
+                        'second-place': $index === 1, 
+                        'third-place': $index === 2,
+                        '': $index > 2,
+                     }">{{ $index+1 }}</div>
+
+                    <span>{{ user.userId.username }}</span>
+                </div>
+
+                <span>
+                    {{ user.result.toFixed(2) }}%
+                </span>
+            </div>
+        }
+    </div>
+}
