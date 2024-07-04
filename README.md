@@ -112,3 +112,5 @@ If you make any changes while in development mode, the project will recompile on
 - [Motoko Language Quick Reference](https://sdk.dfinity.org/docs/language-guide/language-manual.html)
 - [JavaScript API Reference](https://erxue-5aaaa-aaaab-qaagq-cai.raw.ic0.app)
 
+[🔼 Back to top](#hello-angular-motoko)
+
